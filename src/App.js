@@ -7,6 +7,7 @@ function App() {
     const [models, setModels] = useState([]);
 
     const loadModels = async () => {
+        
         try {
             const res = await fetch('/api/models');
             const models = await res.json();
@@ -21,7 +22,7 @@ function App() {
     }, []);
     return (
         <div className="container mt-5">
-            <h1 className="mb-5 text-center">Model Tracker</h1>
+            <h1 className="mb-10 text-center">Model Tracker</h1>
             <ModelForm modelAdded={loadModels} />
             <ModelList models={models} refreshModels={loadModels} />
         </div>

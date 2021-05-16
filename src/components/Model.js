@@ -13,6 +13,18 @@ export default function Model({ model, refreshModels }) {
         }
     };
 
+    const markModelPublic = async () => {
+        try {
+            await fetch('api/models', {
+                method: 'PUT',
+                body : JSON.stringify({...model, private: false}),
+            });
+            refreshModels();
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     const deleteModel = async () => {
         try {
             await fetch('api/models', {
@@ -45,6 +57,14 @@ export default function Model({ model, refreshModels }) {
                     onClick={markModelPrivate}
                 >
                     Private
+                </button>
+            )}
+            {model.private && (
+                <button
+                    className="btn btn-sm btn-primary"
+                    onClick={markModelPublic}
+                >
+                    Public
                 </button>
             )}
             <button
